@@ -122,9 +122,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PixelMap.cpp" />
+    <ClCompile Include="Projectiles.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Screen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PixelMap.h" />
+    <ClInclude Include="Projectiles.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Screen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

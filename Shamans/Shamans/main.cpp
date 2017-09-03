@@ -1,21 +1,16 @@
-#include <SFML\Graphics.hpp>
 
+#include "Screen.h"
 #define WIDTH 800
 #define HEIGHT 600
 #define TITLE "Shamans"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), TITLE);
+	Screen screen(WIDTH, HEIGHT, TITLE);
 
-	while (window.isOpen())
+	while (screen.isOpen())
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			// "close requested" event: we close the window
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
+		screen.input();
+		screen.update();
+		screen.render();
 	}
 }
