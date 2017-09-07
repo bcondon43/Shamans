@@ -14,6 +14,8 @@ public:
 	bool isOpen();
 private:
 	sf::RenderWindow window;
+	bool isFullscreen;
+	char* title;
 	unsigned int width;
 	unsigned int height;
 };
