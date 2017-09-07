@@ -2,24 +2,27 @@
 #define PIXELMAP_H
 
 #include <string>
+#include <SFML\Graphics.hpp>
 
 class PixelMap
 {
 public:
-	PixelMap(unsigned int scene_width, unsigned int scene_height);
+	PixelMap();
 	~PixelMap();
 
 	/**
 	@params takes a png file path and converts it into an array of pixels and flags
+	@returns success or failure
 	*/
 	bool load(std::string png_path);
+	sf::Uint8* getPixels();
+	int getWidth();
+	int getHeight();
 private:
-
-	
-
-	unsigned int scene_width;
-	unsigned int scene_height;
-
+	int width;
+	int height;
+	sf::Uint8* pixels;
+	char* pixel_flags;
 };
 
 #endif

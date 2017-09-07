@@ -1,6 +1,6 @@
 #ifndef SCREEN_H
 #define SCREEN_H
-#include <SFML/Graphics.hpp>
+#include "PixelMap.h"
 
 class Screen
 {
@@ -16,6 +16,7 @@ private:
 	sf::RenderWindow window;
 	bool isFullscreen;
 	char* title;
+	PixelMap* pixelMap;
 	unsigned int width;
 	unsigned int height;
 };

@@ -9,22 +9,25 @@ Screen::Screen(unsigned int width, unsigned int height, char* title)
 	Screen::height = height;
 	Screen::title = title;
 	isFullscreen = false;
+	pixelMap = new PixelMap;
+	pixelMap->load("Resources/ArmyRecruit.png");
 }
 
 
 Screen::~Screen()
 {
+	delete pixelMap;
 }
 
 
 void Screen::render() {
 	window.clear();
 
-	//renders a basic rectangle
-	sf::RectangleShape shape(sf::Vector2f(50,50));
-	shape.setFillColor(sf::Color(255,0,0));
-	shape.setPosition(10, 50);
-	window.draw(shape);
+	sf::Texture texture;
+	texture.create(pixelMap->getWidth(),pixelMap->getHeight());
+	texture.update(pixelMap->getPixels());
+	sf::Sprite sprite(texture);
+	window.draw(sprite);
 
 	window.display();
 }
