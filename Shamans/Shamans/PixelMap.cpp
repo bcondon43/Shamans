@@ -17,7 +17,6 @@ PixelMap::~PixelMap()
 
 
 bool PixelMap::load(std::string png_path) {
-	//TODO: Finish this function
 	sf::Image map;
 
 	if (!map.loadFromFile(png_path)) {

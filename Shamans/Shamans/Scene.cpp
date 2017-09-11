@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-#define MOVE_OFFSET 2.f
+#define MOVE_OFFSET 3.f
 
 Scene::Scene(sf::RenderWindow* window)
 {
