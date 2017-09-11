@@ -1,6 +1,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 #include "PixelMap.h"
+#include "Player.h"
 class Scene
 {
 public:
@@ -15,6 +16,7 @@ private:
 	PixelMap* pixelMap;
 	float x_offset;
 	float y_offset;
+	Player myPlayer;
 };
 
 #endif

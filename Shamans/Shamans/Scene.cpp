@@ -7,6 +7,8 @@ Scene::Scene(sf::RenderWindow* window)
 	Scene::window = window;
 	pixelMap = new PixelMap();
 	pixelMap->load("Resources/grass_map.png");
+	Player myPlayer;
+	myPlayer.setPosition(10, 10);
 }
 
 
@@ -33,8 +35,9 @@ void Scene::render(){
 
 	
 	window->draw(sprite);
+	window->draw((sf::RectangleShape) (myPlayer));
+	
 }
-
 
 void Scene::input(){
 	//Moves the grid
