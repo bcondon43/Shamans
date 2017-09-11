@@ -9,25 +9,21 @@ Screen::Screen(unsigned int width, unsigned int height, char* title)
 	Screen::height = height;
 	Screen::title = title;
 	isFullscreen = false;
-	pixelMap = new PixelMap;
-	pixelMap->load("Resources/ArmyRecruit.png");
+	scene = new Scene(&window);
 }
 
 
 Screen::~Screen()
 {
-	delete pixelMap;
+	
 }
 
 
 void Screen::render() {
 	window.clear();
 
-	sf::Texture texture;
-	texture.create(pixelMap->getWidth(),pixelMap->getHeight());
-	texture.update(pixelMap->getPixels());
-	sf::Sprite sprite(texture);
-	window.draw(sprite);
+	
+	scene->render();
 
 	window.display();
 }
@@ -59,6 +55,9 @@ void Screen::input() {
 			std::cout << "Leaving Fullscreen" << std::endl;
 		}
 	}
+
+
+	scene->input();
 }
 
 void Screen::update() {
