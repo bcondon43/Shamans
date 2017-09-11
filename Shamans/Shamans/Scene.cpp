@@ -22,6 +22,8 @@ void Scene::render(){
 	map_view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
 	map_view.move(x_offset,y_offset);
 	window->setView(map_view);
+
+	pixelMap->destroyCircle(500, 500, 1000);
 	
 	sf::Texture texture;
 	texture.create(pixelMap->getWidth(), pixelMap->getHeight());

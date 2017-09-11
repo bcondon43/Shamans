@@ -18,6 +18,7 @@ public:
 	sf::Uint8* getPixels();
 	int getWidth();
 	int getHeight();
+	void destroyCircle(int w_x, int w_y, int radius);
 private:
 	int width;
 	int height;
