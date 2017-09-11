@@ -18,12 +18,12 @@ Scene::~Scene()
 
 void Scene::render(){
 	//Renders the scene
-	sf::View map_view(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
+	sf::View map_view(sf::FloatRect(0, 0, (float)window->getSize().x,(float)window->getSize().y));
 	map_view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
 	map_view.move(x_offset,y_offset);
 	window->setView(map_view);
 
-	pixelMap->destroyCircle(500, 500, 1000);
+	pixelMap->destroyCircle(900, 700, 100);
 	
 	sf::Texture texture;
 	texture.create(pixelMap->getWidth(), pixelMap->getHeight());

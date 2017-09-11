@@ -2,6 +2,8 @@
 #include "SFML\Graphics.hpp"
 #include <iostream>
 
+#define PI 3.141592
+
 PixelMap::PixelMap()
 {
 }
@@ -27,7 +29,7 @@ bool PixelMap::load(std::string png_path) {
 	pixels = new sf::Uint8[map.getSize().x * map.getSize().y * 4];
 	pixel_flags = new char[map.getSize().x * map.getSize().y];
 	const sf::Uint8* temp_pixels = map.getPixelsPtr();
-	for (int i = 0; i < map.getSize().x * map.getSize().y * 4; i += 4) {
+	for (unsigned int i = 0; i < map.getSize().x * map.getSize().y * 4; i += 4) {
 		if (pixels[i + 3] != 0b0) {
 			pixels[i] = temp_pixels[i];
 			pixels[i + 1] = temp_pixels[i + 1];
@@ -52,14 +54,16 @@ int PixelMap::getHeight() {
 }
 
 void PixelMap::destroyCircle(int w_x, int w_y, int radius) {
-	for (int j = 0; j < radius; j++) {
-		for (int i = 0; i < 360; i++) {
-			int x = w_x + (sin((2.f * 3.14f) / i) * j);
-			int y = w_y + (cos((2.f * 3.14f) / i) * j);
-			if ((y * width) + x < width * height && (y * width) + x > 0) {
-				pixels[(((y * width) + x) * 4) + 3] = 0;
-				pixel_flags[(y * width) + x] = 0;
-			}
+	for (int y = -radius; y <= radius; y++){
+		for (int x = -radius; x <= radius; x++) {
+			if (x*x + y*y <= radius*radius) {
+				int x_t = w_x + x;
+				int y_t = w_y + y;
+				if ((y_t * width) + x_t < width * height && (y_t * width) + x_t > 0) {
+					pixels[(((y_t * width) + x_t) * 4) + 3] = 0;
+					pixel_flags[(y_t * width) + x_t] = 0;
+				}
+			}	
 		}
 	}
 }
