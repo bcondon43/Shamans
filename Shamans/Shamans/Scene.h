@@ -1,7 +1,12 @@
 #ifndef SCENE_H
 #define SCENE_H
-#include "PixelMap.h"
+
+#include <vector>
 #include "Player.h"
+#include "PixelMap.h"
+#include "Spell.h"
+
+
 class Scene
 {
 public:
@@ -13,10 +18,14 @@ public:
 	void update();
 private:
 	sf::RenderWindow* window;
-	PixelMap* pixelMap;
 	float x_offset;
 	float y_offset;
 	Player myPlayer;
+
+	PixelMap* pixelMap;
+	std::vector<Player> players;
+	std::vector<Spell*> spells;
+	bool pressed;
 };
 
 #endif

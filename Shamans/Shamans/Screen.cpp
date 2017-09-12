@@ -15,14 +15,13 @@ Screen::Screen(unsigned int width, unsigned int height, char* title)
 
 Screen::~Screen()
 {
-	
+	delete scene;
 }
 
 
 void Screen::render() {
 	window.clear();
 
-	
 	scene->render();
 
 	window.display();
@@ -61,7 +60,7 @@ void Screen::input() {
 }
 
 void Screen::update() {
-
+	scene->update();
 }
 
 bool Screen::isOpen() {

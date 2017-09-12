@@ -1,7 +1,6 @@
 #include "Player.h"
 
 
-
 Player::Player()
 {
 	setTexture(new sf::Texture());

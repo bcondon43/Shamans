@@ -19,6 +19,7 @@ public:
 	int getWidth();
 	int getHeight();
 	void destroyCircle(int w_x, int w_y, int radius);
+	bool checkHitCircle(sf::CircleShape* circle);
 private:
 	int width;
 	int height;

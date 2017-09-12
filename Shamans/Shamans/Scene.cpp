@@ -1,12 +1,13 @@
 #include "Scene.h"
-
+#include <iostream>
 #define MOVE_OFFSET 3.f
 
-Scene::Scene(sf::RenderWindow* window)
+Scene::Scene(sf::RenderWindow* window) : pressed(false)
 {
 	Scene::window = window;
 	pixelMap = new PixelMap();
 	pixelMap->load("Resources/grass_map.png");
+
 	Player myPlayer;
 	myPlayer.setPosition(10, 10);
 }
@@ -15,6 +16,9 @@ Scene::Scene(sf::RenderWindow* window)
 Scene::~Scene()
 {
 	delete pixelMap;
+	for (std::vector<Spell*>::iterator it = spells.begin(); it != spells.end(); ++it) {
+		delete *it;
+	}
 }
 
 
@@ -25,17 +29,20 @@ void Scene::render(){
 	map_view.move(x_offset,y_offset);
 	window->setView(map_view);
 
-	pixelMap->destroyCircle(900, 700, 100);
-	
+
+	//Renders destructible map
 	sf::Texture texture;
-	texture.create(pixelMap->getWidth(), pixelMap->getHeight());
-	texture.update(pixelMap->getPixels());
+		texture.create(pixelMap->getWidth(), pixelMap->getHeight());
+		texture.update(pixelMap->getPixels());
 	sf::Sprite sprite(texture);
-
-
-	
 	window->draw(sprite);
+
+
 	window->draw((sf::RectangleShape) (myPlayer));
+
+	for (std::vector<Spell*>::iterator it = spells.begin(); it != spells.end(); ++it) {
+		window->draw(*((*it)->getCircle()));
+	}
 	
 }
 
@@ -53,5 +60,24 @@ void Scene::input(){
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		y_offset -= MOVE_OFFSET;
 	}
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !pressed) {
+		pressed = true;
+	}
+	if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && pressed) {
+		//pixelMap->destroyCircle(sf::Mouse::getPosition(*window).x +x_offset, sf::Mouse::getPosition(*window).y+y_offset, 100);
+		spells.push_back(new Spell(&myPlayer, sf::Mouse::getPosition(*window).x + x_offset, sf::Mouse::getPosition(*window).y + y_offset));
+		pressed = false;
+	}
 }
-void Scene::update(){}
+void Scene::update(){
+	for (std::vector<Spell*>::iterator it = spells.begin(); it != spells.end();) {
+		(*it)->update();
+		if (pixelMap->checkHitCircle((*it)->getCircle())) {
+			delete *it;
+			it = spells.erase(it);
+			std::cout << "ERASED A SPELL" << std::endl;
+		}
+		else
+			++it;
+	}
+}
