@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#define GRAVITY 1.f
 
 Player::Player()
 {
@@ -11,4 +11,9 @@ Player::Player()
 
 Player::~Player()
 {
+}
+
+void Player::update(float delta)
+{
+	//move(0, GRAVITY * delta);
 }

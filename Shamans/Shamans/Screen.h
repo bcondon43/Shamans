@@ -10,7 +10,7 @@ public:
 
 	void render();
 	void input();
-	void update();
+	void update(float delta);
 	bool isOpen();
 private:
 	sf::RenderWindow window;

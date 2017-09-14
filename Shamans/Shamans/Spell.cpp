@@ -1,5 +1,6 @@
 #include "Spell.h"
 #include <iostream>
+#define SLOW_DOWN 2.0f
 
 Spell::Spell(Player * player, float w_x, float w_y): p_radius(10)
 {
@@ -8,8 +9,8 @@ Spell::Spell(Player * player, float w_x, float w_y): p_radius(10)
 	velocity->x -= player->getPosition().x;
 	velocity->y -= player->getPosition().y;
 	float length = sqrt((velocity->x * velocity->x) + (velocity->y * velocity->y));
-	velocity->x = velocity->x / length;
-	velocity->y = velocity->y / length;
+	velocity->x = velocity->x / (SLOW_DOWN * length);
+	velocity->y = velocity->y / (SLOW_DOWN * length);
 	circle = new sf::CircleShape(20);
 	circle->setPosition(player->getPosition());
 	circle->move(-circle->getRadius(), -circle->getRadius());
@@ -22,9 +23,9 @@ Spell::~Spell()
 	delete velocity;
 }
 
-void Spell::update()
+void Spell::update(float delta)
 {
-	circle->move(velocity->x, velocity->y);
+	circle->move(velocity->x * delta, velocity->y * delta);
 }
 
 sf::CircleShape* Spell::getCircle()

@@ -15,7 +15,7 @@ public:
 
 	void render();
 	void input();
-	void update();
+	void update(float delta);
 private:
 	sf::RenderWindow* window;
 	float x_offset;

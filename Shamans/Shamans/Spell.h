@@ -8,7 +8,7 @@ public:
 	Spell(Player* player, float w_x, float w_y);
 	~Spell();
 
-	void update();
+	void update(float delta);
 	sf::CircleShape* getCircle();
 	int getPowerRadius();
 private:

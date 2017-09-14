@@ -69,9 +69,14 @@ void Scene::input(){
 		pressed = false;
 	}
 }
-void Scene::update(){
+void Scene::update(float delta){
+	//updates players
+	myPlayer.update(delta);
+
+
+	//Updates spells
 	for (std::vector<Spell*>::iterator it = spells.begin(); it != spells.end();) {
-		(*it)->update();
+		(*it)->update(delta);
 		if (pixelMap->checkHitCircle((*it)->getCircle())) {
 			delete *it;
 			it = spells.erase(it);

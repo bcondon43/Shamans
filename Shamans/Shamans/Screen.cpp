@@ -59,8 +59,8 @@ void Screen::input() {
 	scene->input();
 }
 
-void Screen::update() {
-	scene->update();
+void Screen::update(float delta) {
+	scene->update(delta);
 }
 
 bool Screen::isOpen() {

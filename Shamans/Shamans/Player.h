@@ -8,7 +8,8 @@ class Player : public sf::RectangleShape
 public:
 	Player();
 	~Player();
-
+	
+	void update(float delta);
 };
 
 #endif
