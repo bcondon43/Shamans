@@ -12,6 +12,7 @@ Spell::Spell(Player * player, float w_x, float w_y): p_radius(10)
 	velocity->y = velocity->y / length;
 	circle = new sf::CircleShape(20);
 	circle->setPosition(player->getPosition());
+	circle->move(-circle->getRadius(), -circle->getRadius());
 	circle->setFillColor(sf::Color(255, 0, 0));
 }
 
