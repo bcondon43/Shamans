@@ -73,17 +73,15 @@ void PixelMap::destroyCircle(int w_x, int w_y, int radius) {
 
 bool PixelMap::checkHitCircle(sf::CircleShape * circle)
 {
-	sf::Vector2i pos = sf::Vector2i((int)circle->getPosition().x, (int)circle->getPosition().y);
+	sf::Vector2i pos = sf::Vector2i((int)(circle->getPosition().x + circle->getRadius()), (int)(circle->getPosition().y + circle->getRadius()));
 
 	int radius = (int)circle->getRadius();
-	bool allOut = true;
 	for (int y = -radius; y <= radius; y++) {
 		for (int x = -radius; x <= radius; x++) {
 			if (x*x + y*y <= radius*radius) {
 				int x_t = pos.x + x;
 				int y_t = pos.y + y;
-				if ((y_t * width) + x_t < width * height && (y_t * width) + x_t >= 0 && !(x_t < 0 || x_t > width)) {
-					allOut = false;
+				if ((y_t * width) + x_t < width * height && (y_t * width) + x_t >= 0 && !(x_t < 0 || x_t >= width)) {
 					if (pixel_flags[(y_t * width) + x_t]) {
 						destroyCircle(x_t, y_t, radius);
 						return true;
@@ -92,5 +90,5 @@ bool PixelMap::checkHitCircle(sf::CircleShape * circle)
 			}
 		}
 	}
-	return allOut;
+	return false;
 }
